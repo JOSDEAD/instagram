@@ -10,5 +10,18 @@ const doesUserNameExist = (username) =>{
     
     return userExists   
 }
+const getUserInfoById = (uid) =>{
+    const userInfo = firebase
+    .firestore()
+    .collection("users")
+    .where("userId","==",uid)
+    .get()
+    .then(result => result.docs.map((item)=>({
+        ...item.data(),
+        docId:item.id
+    })
+    ))
+    return userInfo
+}
 
-export  {doesUserNameExist}
+export  {doesUserNameExist,getUserInfoById}

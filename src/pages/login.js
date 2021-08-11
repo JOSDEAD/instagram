@@ -13,7 +13,7 @@ const Login = () => {
     const [error,setError] = useState("");
     const isInvalid= emailAddress === "" | password === "";
 
-    const handleLogin = (event) => {
+    const handleLogin =  (event) => {
         event.preventDefault();
         firebase.auth().signInWithEmailAndPassword(emailAddress,password)
         .then(()=>history.push(ROUTES.DASHBOARD))

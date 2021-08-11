@@ -23,5 +23,16 @@ const getUserInfoById = (uid) =>{
     ))
     return userInfo
 }
-
-export  {doesUserNameExist,getUserInfoById}
+const getRecomendationForUser = (id,following)=>{
+    const recomendation = firebase
+    .firestore()
+    .collection("users")
+    .limit(10)
+    .get()
+    .then(recomendation => {
+        const userArray=recomendation.docs.map(item=>({...item.data(),docId:item.id}))
+        return userArray.filter(({userId})=>userId!==id && !following.includes(userId))
+    })
+    return recomendation
+}
+export  {doesUserNameExist,getUserInfoById,getRecomendationForUser} 

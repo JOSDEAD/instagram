@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { Link } from "react-router-dom" 
 import { DEFAULT_IMAGE_PATH } from '../../constants/paths';
 const User = ({username,fullName}) =>{
-    
     return(
         <>
         {!username || !fullName
@@ -36,5 +35,5 @@ export default User;
 
 User.propTypes={
     username: PropTypes.string,
-    fullName: PropTypes.string.isRequired
+    fullName: PropTypes.string
 }

@@ -1,4 +1,4 @@
-import { useState,useContext, useEffect} from "react";
+import { useState,useContext, useEffect, useMemo} from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import FirebaseContext from "../context/firebase";
@@ -14,16 +14,13 @@ const SignUp = () => {
     const [password,setPassword] = useState("");
     const [error,setError] = useState("");
     const isInvalid= emailAddress === "" | password === "" | userName=== "" | fullName === "";
-
     const handleSignUp =  (event) => {
         event.preventDefault();
         SERVICE.doesUserNameExist(userName)
         .then(userExist=>{
             if(!userExist){
                 // Manage authentication
-                const createdUserPromise=firebase.auth().createUserWithEmailAndPassword(emailAddress,password)
-                
-                createdUserPromise
+                firebase.auth().createUserWithEmailAndPassword(emailAddress,password)
                 .then(createdUser=>{
                     // Add display name to the created user
                     createdUser.user.updateProfile({displayName:userName})

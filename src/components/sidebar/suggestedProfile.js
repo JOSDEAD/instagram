@@ -1,13 +1,17 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {DEFAULT_IMAGE_PATH} from '../../constants/paths'
-const SuggestedProfile = ({profileId,profileUsername,userId}) =>{
+import { updateFollowers,updateFollowings} from '../../services/firebase'
+const SuggestedProfile = ({profileId,profileUsername,profileDocId,userId,userDocId}) =>{
     const [followed,setFollowed]=useState(false)
     const handleFollow=()=>{
         setFollowed(true)
-        //TODO Actually follow the user in the DB
 
+        //TODO Actually follow the user in the DB
+        updateFollowers(profileDocId,userId,false);
+        updateFollowings(userDocId,profileId,false);
     }
+    
     return !followed?(
         <div className="flex flex-row justify-between items-center align-items">
             <div className="flex justify-between items-center ">

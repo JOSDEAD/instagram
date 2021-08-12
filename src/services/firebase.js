@@ -35,4 +35,27 @@ const getRecomendationForUser = (id,following)=>{
     })
     return recomendation
 }
-export  {doesUserNameExist,getUserInfoById,getRecomendationForUser} 
+// followedDocId = The user that was followed
+// follower = the user that want to follow someone
+const updateFollowers = (followedDocId,follower,isFollower) =>{
+    return firebase
+    .firestore()
+    .collection("users")
+    .doc(followedDocId)
+    .update({followers:isFollower?FieldValue.arrayRemove(follower):FieldValue.arrayUnion(follower) // If it's already following then remove it from the followers
+    })
+}
+// docId = the current user profile
+// followed = the user that was followed
+// We are adding the use that was followed to the following of the current user
+const updateFollowings = (docId,followed,isFollowingProfile) =>{
+    return firebase
+   .firestore()
+   .collection("users")
+   .doc(docId)
+   .update({
+       following:isFollowingProfile?FieldValue.arrayRemove(followed):FieldValue.arrayUnion(followed) // If I'm already following that person remove it from my followings
+    })
+}
+
+export  {doesUserNameExist,getUserInfoById,getRecomendationForUser,updateFollowers,updateFollowings} 

@@ -2,15 +2,14 @@ import {getRecomendationForUser} from '../../services/firebase'
 import { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton';
 import SuggestedProfile from './suggestedProfile'
-const Recomendation = ({id,following}) => {
+const Recomendation = ({userId,docId,following}) => {
     const [profiles,setProfiles]= useState(null)
     useEffect(()=>{
-        if(id){
-            getRecomendationForUser(id,following)
-            .then(profiles=>setProfiles(profiles))
-            
+        if(userId){
+            getRecomendationForUser(userId,following)
+            .then(profiles=>setProfiles(profiles.slice(0,5)))
         }
-    },[id,following]);
+    },[userId,following]);
 
     return(
         <div>
@@ -27,9 +26,11 @@ const Recomendation = ({id,following}) => {
                                 profiles.map(profile=>
                                     <SuggestedProfile
                                         key={profile.docId}
-                                        profileId={profile.docId}    
+                                        profileId={profile.userId}    
                                         profileUsername={profile.username}
-                                        userId={id} // So we can add followers
+                                        profileDocId={profile.docId}
+                                        userDocId={docId}
+                                        userId={userId} // So we can add followers
                                     />
                                 )
                             }

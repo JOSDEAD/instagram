@@ -58,4 +58,31 @@ const updateFollowings = (docId,followed,isFollowingProfile) =>{
     })
 }
 
-export  {doesUserNameExist,getUserInfoById,getRecomendationForUser,updateFollowers,updateFollowings} 
+const getUserPhotos = async (followingList,userId) =>{
+    const photosResult = await firebase
+    .firestore()
+    .collection("photos")
+    .where('userId','in',followingList)
+    .get()
+
+    const photosWithDocId = photosResult.docs.map((photo)=>({
+        ...photo.data(),
+        docId:photo.id
+    }));
+
+    const photosToShow = await Promise.all(
+        photosWithDocId.map(async (photo)=>{
+            let userLikedPhoto = false;
+            if(photo.likes.includes(userId)){
+                userLikedPhoto=true;
+            }
+            const user = await getUserInfoById(photo.userId);
+            const {username}=user[0];
+            return {userLikedPhoto,username,...photo}
+        })
+    )
+    return photosToShow;
+
+}
+
+export  {doesUserNameExist,getUserInfoById,getRecomendationForUser,updateFollowers,updateFollowings,getUserPhotos} 

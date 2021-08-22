@@ -2,6 +2,7 @@ import {getRecomendationForUser} from '../../services/firebase'
 import { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton';
 import SuggestedProfile from './suggestedProfile'
+import Proptypes from 'prop-types'
 const Recomendation = ({userId,docId,following}) => {
     const [profiles,setProfiles]= useState(null)
     useEffect(()=>{
@@ -41,6 +42,11 @@ const Recomendation = ({userId,docId,following}) => {
         </div>
     )
     
+}
+Recomendation.propTypes = {
+    userId:Proptypes.string,
+    docId:Proptypes.string,
+    following:Proptypes.array,
 }
 
 export default Recomendation

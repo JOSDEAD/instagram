@@ -85,4 +85,16 @@ const getUserPhotos = async (followingList,userId) =>{
 
 }
 
-export  {doesUserNameExist,getUserInfoById,getRecomendationForUser,updateFollowers,updateFollowings,getUserPhotos} 
+const likePost = (postDoctId,userId,liked) =>{
+    console.log(userId);
+    const toggleLike = firebase
+    .firestore()
+    .collection("photos")
+    .doc(postDoctId)
+    .update({
+        likes:liked?FieldValue.arrayRemove(userId):FieldValue.arrayUnion(userId) //If the user likes it, then dislike the photo
+    })
+    return toggleLike
+}
+
+export  {doesUserNameExist,getUserInfoById,getRecomendationForUser,updateFollowers,updateFollowings,getUserPhotos,likePost} 

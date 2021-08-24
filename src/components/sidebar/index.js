@@ -1,8 +1,8 @@
-import useUser from "../../hooks/use-user";
 import User from "./user"
 import Recomendation from "./recomendation"
+import { useSelector } from "react-redux";
 const Sidebar = () =>{
-    const {user:{username,fullName,userId,following,docId}} = useUser();
+    const {username,fullName,userId,following,docId} = useSelector(state=>state.user);
     return(
         <div className="p-4 container">
             <div className="fixed">

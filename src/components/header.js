@@ -1,12 +1,12 @@
 import { useContext } from "react"
 import FirebaseContext from "../context/firebase"
-import UserContext from "../context/user"
 import * as ROUTES from '../constants/routes';
 import { Link, useHistory } from "react-router-dom";
 import { DEFAULT_IMAGE_PATH } from '../constants/paths';
+import { useSelector } from "react-redux";
 
 const Header = () =>{
-    const user = useContext(UserContext)
+    const user = useSelector(state => state.user)
     const {firebase} = useContext(FirebaseContext)
     const history = useHistory();
 
@@ -71,10 +71,10 @@ const Header = () =>{
                             </svg>
                             </button>
                             <div className="flex items-center cursor-pointer">
-                                <Link to={`/p/${user.displayName}`}>
+                                <Link to={`/p/${user.username}`}>
                                 <img
                                     className="rounded-full h-8 w-8 flex"
-                                    src={`/images/avatars/${user.displayName}.jpg`}
+                                    src={`/images/avatars/${user.username}.jpg`}
                                     alt={`${user?.username} profile`}
                                     onError={(e) => {
                                     e.target.src = DEFAULT_IMAGE_PATH;

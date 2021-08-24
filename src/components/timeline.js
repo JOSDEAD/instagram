@@ -1,10 +1,10 @@
 import Post from './post'
 import usePhotos from '../hooks/use-photos'
 import Skeleton from 'react-loading-skeleton';
-import useUser from '../hooks/use-user'
+import { useSelector } from 'react-redux';
 const Timeline = () =>{
     const {photos} = usePhotos();
-    const {user} = useUser();
+    const user = useSelector(state => state.user);
     return(
         <div className="container col-span-2">
         {

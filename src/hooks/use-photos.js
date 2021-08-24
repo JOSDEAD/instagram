@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import useUser from "./use-user";
-import {getUserPhotos} from '../services/firebase'
+import {getUserPhotos} from '../services/firebase';
+import { useSelector } from "react-redux";
 const usePhotos = () =>{
     const [photos,setPhotos] = useState();
-    const {user : {following,userId}} = useUser();
+    const {following,userId} = useSelector(state=>state.user);
     const followingList = useMemo(()=>{return following && userId?[...following,userId]:null},[following,userId]);
 
     useEffect(()=>{

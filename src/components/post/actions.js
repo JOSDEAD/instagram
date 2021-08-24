@@ -1,14 +1,11 @@
 import PropTypes from 'prop-types';
-import { useContext, useState } from 'react';
-import UserContext from '../../context/user';
-import useUser from '../../hooks/use-user';
+import { useState } from 'react';
 import { likePost } from '../../services/firebase';
 import Likes from './likes';
 const Actions = ({likes,userLikedPhoto,docId,following,userId}) =>{
     const [liked,setLiked] = useState(userLikedPhoto);
     const [numberOfLikes,setNumberOfLikes] = useState(likes.length)
     const toggleLiked = () =>{
-        console.log("userId",userId);
         likePost(docId,userId,liked)
         .then(()=>{
             liked?setNumberOfLikes(numberOfLikes-1):setNumberOfLikes(numberOfLikes+1);

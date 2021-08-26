@@ -1,4 +1,3 @@
-import useUser from "../../hooks/use-user";
 import { LOGIN_OK,LOGOUT } from "../actions/userActions";
 
 const userReducer = (state={},action) => {
@@ -10,10 +9,6 @@ const userReducer = (state={},action) => {
         default:
             return state;
     }
-
-}
-
-const getInfoFromLoginUser = () =>{
 
 }
 

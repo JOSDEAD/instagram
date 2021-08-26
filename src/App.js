@@ -1,7 +1,6 @@
 import { lazy, Suspense } from 'react';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom'
 import * as ROUTES from './constants/routes';
-import useAuthListener from './hooks/use-auth-listener';
 
 //Lazy allows us to split the bundle into chucks
 // it returns a promise, needs to be render inside a suspense component
@@ -10,7 +9,6 @@ const SignUp = lazy(()=>import('./pages/sign-up'))
 const NotFound = lazy(()=>import('./pages/not-found'))
 const Dashboard = lazy(()=>import('./pages/bashboard'))
 function App() {
-  useAuthListener()
   return (
       <Router>
         <Suspense fallback={<p>Loading...</p>}>

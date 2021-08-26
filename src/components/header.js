@@ -5,7 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 import { DEFAULT_IMAGE_PATH } from '../constants/paths';
 import { useSelector } from "react-redux";
 
-const Header = () =>{
+const Header = ({isLogged}) =>{
     const user = useSelector(state => state.user)
     const {firebase} = useContext(FirebaseContext)
     const history = useHistory();
@@ -22,7 +22,7 @@ const Header = () =>{
                         </h1>
                     </div>
                     <div className="text-gray-700 text-center flex items-center align-items">
-                        {user ? (
+                        {isLogged ? (
                         <>
                             <Link to={ROUTES.DASHBOARD} aria-label="Dashboard">
                             <svg

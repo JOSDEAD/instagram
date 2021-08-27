@@ -1,14 +1,17 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import { useDispatch } from 'react-redux';
 import { likePost } from '../../services/firebase';
+import { addLikeToPost, removeLikeToPost } from '../../state/actions/postActions'
 import Likes from './likes';
 const Actions = ({likes,userLikedPhoto,docId,following,userId}) =>{
+    const dispatch = useDispatch();
     const [liked,setLiked] = useState(userLikedPhoto);
-    const [numberOfLikes,setNumberOfLikes] = useState(likes.length)
+    const numberOfLikes = useMemo(() => likes.length,[likes])
     const toggleLiked = () =>{
         likePost(docId,userId,liked)
         .then(()=>{
-            liked?setNumberOfLikes(numberOfLikes-1):setNumberOfLikes(numberOfLikes+1);
+            liked?dispatch(removeLikeToPost(docId,userId)):dispatch(addLikeToPost(docId,userId));
             setLiked(!liked);
         })
     }

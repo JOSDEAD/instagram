@@ -3,13 +3,13 @@ import FirebaseContext from "../context/firebase"
 import * as ROUTES from '../constants/routes';
 import { Link, useHistory } from "react-router-dom";
 import { DEFAULT_IMAGE_PATH } from '../constants/paths';
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { logOut } from "../state/actions/userActions";
 const Header = ({isLogged}) =>{
     const user = useSelector(state => state.user)
     const {firebase} = useContext(FirebaseContext)
     const history = useHistory();
-
+    const dispatch = useDispatch();
     return(
         <header className="h-16 bg-white border-b border-gray-primary mb-8 sticky top-0">
             <div className="container mx-auto max-w-screen-lg h-full">
@@ -22,7 +22,7 @@ const Header = ({isLogged}) =>{
                         </h1>
                     </div>
                     <div className="text-gray-700 text-center flex items-center align-items">
-                        {isLogged ? (
+                        {user ? (
                         <>
                             <Link to={ROUTES.DASHBOARD} aria-label="Dashboard">
                             <svg
@@ -45,11 +45,13 @@ const Header = ({isLogged}) =>{
                             type="button"
                             title="Sign Out"
                             onClick={() => {
+                                dispatch(logOut());
                                 firebase.auth().signOut();
                                 history.push(ROUTES.LOGIN);
                             }}
                             onKeyDown={(event) => {
                                 if (event.key === 'Enter') {
+                                dispatch(logOut());
                                 firebase.auth().signOut();
                                 history.push(ROUTES.LOGIN);
                                 }

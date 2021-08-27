@@ -6,7 +6,6 @@ const Timeline = () =>{
     usePhotos();
     const user = useSelector(state => state.user);
     const posts = useSelector(state => state.posts);
-    console.log(posts);
     return(
         <div className="container col-span-2">
         {

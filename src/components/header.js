@@ -1,15 +1,15 @@
 import { useContext } from "react"
 import FirebaseContext from "../context/firebase"
-import UserContext from "../context/user"
 import * as ROUTES from '../constants/routes';
 import { Link, useHistory } from "react-router-dom";
 import { DEFAULT_IMAGE_PATH } from '../constants/paths';
-
-const Header = () =>{
-    const user = useContext(UserContext)
+import { useSelector, useDispatch } from "react-redux";
+import { logOut } from "../state/actions/userActions";
+const Header = ({isLogged}) =>{
+    const user = useSelector(state => state.user)
     const {firebase} = useContext(FirebaseContext)
     const history = useHistory();
-
+    const dispatch = useDispatch();
     return(
         <header className="h-16 bg-white border-b border-gray-primary mb-8 sticky top-0">
             <div className="container mx-auto max-w-screen-lg h-full">
@@ -45,11 +45,13 @@ const Header = () =>{
                             type="button"
                             title="Sign Out"
                             onClick={() => {
+                                dispatch(logOut());
                                 firebase.auth().signOut();
                                 history.push(ROUTES.LOGIN);
                             }}
                             onKeyDown={(event) => {
                                 if (event.key === 'Enter') {
+                                dispatch(logOut());
                                 firebase.auth().signOut();
                                 history.push(ROUTES.LOGIN);
                                 }
@@ -71,10 +73,10 @@ const Header = () =>{
                             </svg>
                             </button>
                             <div className="flex items-center cursor-pointer">
-                                <Link to={`/p/${user.displayName}`}>
+                                <Link to={`/p/${user.username}`}>
                                 <img
                                     className="rounded-full h-8 w-8 flex"
-                                    src={`/images/avatars/${user.displayName}.jpg`}
+                                    src={`/images/avatars/${user.username}.jpg`}
                                     alt={`${user?.username} profile`}
                                     onError={(e) => {
                                     e.target.src = DEFAULT_IMAGE_PATH;

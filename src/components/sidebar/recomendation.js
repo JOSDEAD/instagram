@@ -11,7 +11,6 @@ const Recomendation = ({userId,docId,following}) => {
             .then(profiles=>setProfiles(profiles.slice(0,5)))
         }
     },[userId,following]);
-
     return(
         <div>
             {

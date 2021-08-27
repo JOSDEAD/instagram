@@ -86,7 +86,6 @@ const getUserPhotos = async (followingList,userId) =>{
 }
 
 const likePost = (postDoctId,userId,liked) =>{
-    console.log(userId);
     const toggleLike = firebase
     .firestore()
     .collection("photos")

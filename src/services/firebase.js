@@ -96,4 +96,16 @@ const likePost = (postDoctId,userId,liked) =>{
     return toggleLike
 }
 
-export  {doesUserNameExist,getUserInfoById,getRecomendationForUser,updateFollowers,updateFollowings,getUserPhotos,likePost} 
+const commentToPost = (docId,username,comment) => {
+    const commentToAdd = firebase
+        .firestore()
+        .collection('photos')
+        .doc(docId)
+        .update({
+            comments: FieldValue.arrayUnion({displayName:username,comment})
+        })
+    return commentToAdd
+}
+
+
+export  {doesUserNameExist,getUserInfoById,getRecomendationForUser,updateFollowers,updateFollowings,getUserPhotos,likePost,commentToPost} 

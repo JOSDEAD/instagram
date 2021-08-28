@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import AddComment from './add-comment'
 
 const Comments = ({docId, comments, posted, commentInput}) => {
-
+    
     return( 
         <>
         <div className="px-4 pt-1 pb-4">

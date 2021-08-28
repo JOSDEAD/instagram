@@ -1,11 +1,11 @@
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
 import Header from "../components/header"
 import Timeline from "../components/timeline"
 import Sidebar from "../components/sidebar"
-import useAuthListener from '../hooks/use-auth-listener';
+import LoggedContext from "../context/logged";
 
 const Dashboard = () => {
-    const isLogged=useAuthListener();
+    const isLogged=useContext(LoggedContext);
     useEffect(()=>{
         document.title="Instagram" 
     },[])

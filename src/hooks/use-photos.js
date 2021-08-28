@@ -11,9 +11,10 @@ const usePhotos = () =>{
         const getTimeLinePhotos = async () =>{
             if(followingList){
                 const photos = await getUserPhotos(followingList,userId);
-                const photosInOrder = photos.sort((a,b) => a.dateCreated - b.dateCreated)
+                const photosInOrder = photos.sort((a,b) => b.dateCreated - a.dateCreated)
                 setPhotos(photosInOrder);
                 dispatch(getAllPost(photosInOrder));
+                console.log(photosInOrder);
             }
         }
         getTimeLinePhotos();

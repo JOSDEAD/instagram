@@ -2,15 +2,20 @@ import Header from "./header";
 import Image from "./image"
 import PropTypes from 'prop-types'
 import Actions from "./actions";
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
+import Comments from "./comments";
+import Description from "./description";
 const Post = ({post,user}) =>{
-    const {following,userId}=user;
+    const {following,userId,username}=user;
     const memPost= useMemo(()=>post,[post]);
+    const commentInput = useRef();
     return(
         <div className="rounded col-span-4 border bg-white border-gray-primary mb-12">
             <Header username={post.username}/>
             <Image src={post.imageSrc} caption={post.caption}/>
             <Actions likes={memPost.likes} userLikedPhoto={memPost.userLikedPhoto} docId={memPost.docId} following={following} userId={userId}/>
+            <Description username={memPost.username} caption={memPost.caption}/>
+            <Comments comments={memPost.comments} docId={memPost.docId} posted={memPost.dateCreated} commentInput={commentInput}/>
         </div>
         
     )

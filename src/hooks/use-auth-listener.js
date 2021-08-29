@@ -8,6 +8,7 @@ const useAuthListener = () =>{
     const dispatch = useDispatch();
     const [isLogged,setIsLogged]=useState();
     useEffect(()=>{
+        console.log(isLogged);
         const listener = firebase.auth().onAuthStateChanged((user)=>{
             if(user){
                 //user if signed in, therefore we should add it to the local storage

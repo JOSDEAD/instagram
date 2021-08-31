@@ -5,16 +5,20 @@ import { getUserInfoByUsername } from "../services/firebase";
 import { NOT_FOUND } from "../constants/routes";
 import LoggedContext from "../context/logged";
 import UserProfile from "../components/profile";
+import { useDispatch } from "react-redux";
+import { getProfileInfo } from "../state/actions/profileActions";
 
 const Profile = () => {
   const isLogged = useContext(LoggedContext);
   const { username } = useParams();
   const [userInfo, setUserInfo] = useState();
   const history = useHistory();
+  const dispatch = useDispatch();
   useEffect(() => {
     getUserInfoByUsername(username).then(([info]) => {
-      setUserInfo(info);
-      userInfo && history.push(NOT_FOUND);
+      info?.userId
+        ? setUserInfo(info) || dispatch(getProfileInfo(info))
+        : history.push(NOT_FOUND);
     });
   }, [username]);
   return (
@@ -23,7 +27,7 @@ const Profile = () => {
         <div className="bg-gray-background">
           <Header isLogged={isLogged} />
           <div className="mx-auto max-w-screen-lg">
-            <UserProfile profile={userInfo} />
+            <UserProfile/>
           </div>
         </div>
       )}

@@ -1,6 +1,8 @@
+import { useSelector } from "react-redux";
 import Header from "./header"
 
-const UserProfile = ({ profile }) => {
+const UserProfile = () => {
+  const profile = useSelector(state => state.profile)
   return (
     <>
         <Header profile={profile}/>

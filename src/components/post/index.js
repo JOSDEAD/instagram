@@ -5,8 +5,9 @@ import Actions from "./actions";
 import { useMemo, useRef } from "react";
 import Comments from "./comments";
 import Description from "./description";
-const Post = ({post,user}) =>{
-    const {following,userId,username}=user;
+import React from 'react'
+const Post =({post,user}) =>{
+    const {following,userId}=user;
     const memPost= useMemo(()=>post,[post]);
     const commentInput = useRef();
     return(
@@ -34,4 +35,5 @@ Post.propTypes = {
     })
 }
 
-export default Post;
+
+export default  Post

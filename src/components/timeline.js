@@ -2,6 +2,7 @@ import Post from './post'
 import usePhotos from '../hooks/use-photos'
 import Skeleton from 'react-loading-skeleton';
 import { useSelector } from 'react-redux';
+import React from 'react'
 const Timeline = () =>{
     usePhotos();
     const user = useSelector(state => state.user);

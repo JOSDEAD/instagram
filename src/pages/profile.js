@@ -27,7 +27,7 @@ const Profile = () => {
         <div className="bg-gray-background">
           <Header isLogged={isLogged} />
           <div className="mx-auto max-w-screen-lg">
-            <UserProfile/>
+            <UserProfile />
           </div>
         </div>
       )}

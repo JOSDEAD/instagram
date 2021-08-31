@@ -23,9 +23,9 @@ const ProtectedRoute = ({ isLogged, children, ...rest }) => {
   );
 };
 
-ProtectedRoute.prototypes= {
-    isLogged:PropTypes.object,
-    children: PropTypes.object.isRequired
-}
+ProtectedRoute.prototypes = {
+  isLogged: PropTypes.object,
+  children: PropTypes.object.isRequired,
+};
 
 export default ProtectedRoute;

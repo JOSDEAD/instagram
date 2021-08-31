@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import { Route, Redirect } from "react-router-dom";
 
 const IsUserLoggedIn = ({ isLogged, loggedInPath, children, ...rest }) => {
-
   return (
     <Route
       {...rest}

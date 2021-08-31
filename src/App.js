@@ -19,16 +19,24 @@ function App() {
       <LoggedContext.Provider value={isLogged}>
         <Suspense fallback={<p>Loading...</p>}>
           <Switch>
-            <IsUserLoggedIn isLogged={isLogged} loggedInPath={ROUTES.DASHBOARD} path={ROUTES.LOGIN}>
-              <Login/>
+            <IsUserLoggedIn
+              isLogged={isLogged}
+              loggedInPath={ROUTES.DASHBOARD}
+              path={ROUTES.LOGIN}
+            >
+              <Login />
             </IsUserLoggedIn>
-            <IsUserLoggedIn isLogged={isLogged} loggedInPath={ROUTES.DASHBOARD} path={ROUTES.SIGN_UP}>
-              <SignUp/>
+            <IsUserLoggedIn
+              isLogged={isLogged}
+              loggedInPath={ROUTES.DASHBOARD}
+              path={ROUTES.SIGN_UP}
+            >
+              <SignUp />
             </IsUserLoggedIn>
             <ProtectedRoute isLogged={isLogged} path={ROUTES.DASHBOARD} exact>
               <Dashboard />
             </ProtectedRoute>
-            <Route path={ROUTES.PROFILE} component={Profile}/>
+            <Route path={ROUTES.PROFILE} component={Profile} />
             <Route component={NotFound} />
           </Switch>
         </Suspense>

@@ -25,7 +25,7 @@ const getUserInfoById = (uid) => {
   return userInfo;
 };
 const getUserInfoByUsername = (username) => {
-    const userInfo = firebase
+  const userInfo = firebase
     .firestore()
     .collection("users")
     .where("username", "==", username)
@@ -142,5 +142,5 @@ export {
   getUserPhotos,
   likePost,
   commentToPost,
-  getUserInfoByUsername
+  getUserInfoByUsername,
 };

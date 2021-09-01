@@ -8,7 +8,7 @@ import {
 const postReducer = (state = null, action) => {
   switch (action.type) {
     case GET_ALL_POST:
-      return state ? state.concat(action.payload) : action.payload;
+      return action.payload;
     case ADD_LIKE:
       return addLike(state, action.payload.docId, action.payload.userId);
     case REMOVE_LIKE:

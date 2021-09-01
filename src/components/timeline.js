@@ -4,9 +4,9 @@ import Skeleton from "react-loading-skeleton";
 import { useSelector } from "react-redux";
 import React from "react";
 const Timeline = () => {
-  usePhotos();
   const user = useSelector((state) => state.user);
   const posts = useSelector((state) => state.posts);
+  usePhotos(user);
   return (
     <div className="container col-span-2">
       {!posts ? (

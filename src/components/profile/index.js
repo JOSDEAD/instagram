@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Header from "./header";
 import {getUserPhotosbyUserId} from '../../services/firebase';
 import {getAllPost} from '../../state/actions/postActions';
+import Photos from "./photos";
 const UserProfile = () => {
   const profile = useSelector((state) => state.profile);
   const photos = useSelector((state) => state.posts)
@@ -19,6 +20,7 @@ const UserProfile = () => {
   return (
     <>
       <Header profile={profile} photosCount={photos?.length} />
+      <Photos photos={photos}/>
     </>
   );
 };

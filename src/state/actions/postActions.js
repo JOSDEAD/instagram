@@ -2,13 +2,18 @@ export const GET_ALL_POST = "GET_ALL_POST";
 export const ADD_LIKE = "ADD_LIKE";
 export const REMOVE_LIKE = "REMOVE_LIKE";
 export const ADD_COMMENT = "ADD_COMMENT";
+export const CLEAN_UP_POSTS = "CLEAN_UP_POSTS"
 export const getAllPost = (posts) => {
   return {
     type: GET_ALL_POST,
     payload: posts,
   };
 };
-
+export const cleanUpPosts = () => { 
+  return {
+    type: CLEAN_UP_POSTS
+  }
+}
 export const addLikeToPost = (docId, userId) => {
   return {
     type: ADD_LIKE,

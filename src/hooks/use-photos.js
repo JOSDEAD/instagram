@@ -11,7 +11,6 @@ const usePhotos = (user) => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log(followingList, userId);
     const getTimeLinePhotos = async () => {
       if (followingList) {
         const photos = await getUserPhotos(followingList, userId);
@@ -24,7 +23,6 @@ const usePhotos = (user) => {
     };
     getTimeLinePhotos();
   }, [followingList, userId]);
-
   return { photos };
 };
 

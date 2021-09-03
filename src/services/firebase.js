@@ -109,6 +109,19 @@ const getUserPhotos = async (followingList, userId) => {
   return photosToShow;
 };
 
+const getUserPhotosbyUserId = async (userId) => {
+  const photosResult = await firebase
+    .firestore()
+    .collection("photos")
+    .where("userId", "==", userId)
+    .get();
+
+  const photosWithDocId = photosResult.docs.map((photo) => ({
+    ...photo.data(),
+    docId: photo.id,
+  }));
+  return photosWithDocId;
+}
 const likePost = (postDoctId, userId, liked) => {
   const toggleLike = firebase
     .firestore()
@@ -143,4 +156,5 @@ export {
   likePost,
   commentToPost,
   getUserInfoByUsername,
+  getUserPhotosbyUserId
 };

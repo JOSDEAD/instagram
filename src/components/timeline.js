@@ -1,12 +1,18 @@
 import Post from "./post";
 import usePhotos from "../hooks/use-photos";
 import Skeleton from "react-loading-skeleton";
-import { useSelector } from "react-redux";
-import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { cleanUpPosts } from "../state/actions/postActions";
 const Timeline = () => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const posts = useSelector((state) => state.posts);
   usePhotos(user);
+  const posts = useSelector((state) => state.posts);
+
+  useEffect(()=>{
+    dispatch(cleanUpPosts());
+  },[])
   return (
     <div className="container col-span-2">
       {!posts ? (

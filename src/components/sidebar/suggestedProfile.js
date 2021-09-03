@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { DEFAULT_IMAGE_PATH } from "../../constants/paths";
 import { updateFollowers, updateFollowings } from "../../services/firebase";
@@ -8,12 +8,15 @@ const SuggestedProfile = ({
   profileDocId,
   userId,
   userDocId,
+  following
 }) => {
   const [followed, setFollowed] = useState(false);
+  useEffect(()=>{
+    following.includes(profileId) && setFollowed(true)
+  },[following,profileId])
+
   const handleFollow = () => {
     setFollowed(true);
-
-    //TODO Actually follow the user in the DB
     updateFollowers(profileDocId, userId, false);
     updateFollowings(userDocId, profileId, false);
   };

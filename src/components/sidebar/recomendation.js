@@ -30,6 +30,7 @@ const Recomendation = ({ userId, docId, following }) => {
                 profileDocId={profile.docId}
                 userDocId={docId}
                 userId={userId} // So we can add followers
+                following={following}
               />
             ))}
           </div>

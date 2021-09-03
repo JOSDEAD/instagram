@@ -6,8 +6,8 @@ import { NOT_FOUND } from "../constants/routes";
 import LoggedContext from "../context/logged";
 import UserProfile from "../components/profile";
 import { useDispatch } from "react-redux";
-import { getProfileInfo } from "../state/actions/profileActions";
-
+import { cleanUpProfile, getProfileInfo } from "../state/actions/profileActions";
+import { cleanUpPosts } from "../state/actions/postActions";
 const Profile = () => {
   const isLogged = useContext(LoggedContext);
   const { username } = useParams();
@@ -15,12 +15,16 @@ const Profile = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(cleanUpPosts());
+    dispatch(cleanUpProfile());
     getUserInfoByUsername(username).then(([info]) => {
       info?.userId
         ? setUserInfo(info) || dispatch(getProfileInfo(info))
         : history.push(NOT_FOUND);
     });
   }, [username]);
+
+
   return (
     <>
       {userInfo && (

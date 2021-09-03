@@ -3,6 +3,7 @@ import {
   ADD_LIKE,
   REMOVE_LIKE,
   ADD_COMMENT,
+  CLEAN_UP_POSTS
 } from "../actions/postActions";
 
 const postReducer = (state = null, action) => {
@@ -15,6 +16,8 @@ const postReducer = (state = null, action) => {
       return removeLike(state, action.payload.docId, action.payload.userId);
     case ADD_COMMENT:
       return addComment(state, action.payload.docId, action.payload.comment);
+    case CLEAN_UP_POSTS:
+      return null
     default:
       return state;
   }
